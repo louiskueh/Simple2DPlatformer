@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimplePlatformController : MonoBehaviour {
     [HideInInspector]
@@ -11,9 +12,11 @@ public class SimplePlatformController : MonoBehaviour {
 
     public float moveForce = 365f;
     public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
+    public float jumpForce = 1200f;
     // Check if player is on ground 
     public Transform groundCheck;
+    public Text countText;
+    private int count;
 
     private bool grounded = false;
     private Animator anim;
@@ -23,10 +26,15 @@ public class SimplePlatformController : MonoBehaviour {
 	void Awake () {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        
+    }
+  void Start()
+    {
+        count = 0;
+        setCountText();
+    }
+    // Update is called once per frame
+    void Update () {
         //check if we hit anything below
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         
@@ -34,8 +42,25 @@ public class SimplePlatformController : MonoBehaviour {
         {
             jump = true;
         }
+        setCountText();
 
     }
+    void setCountText()
+    {
+        countText.text = "Count  " + count.ToString();
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Crate"))
+        {
+            Debug.Log("Hello, count is :" + count.ToString(), gameObject);
+            count++;
+            setCountText();
+            Destroy(other.gameObject);
+
+        }
+    }
+
 
     //Physics - fixedUpdate
     void FixedUpdate()

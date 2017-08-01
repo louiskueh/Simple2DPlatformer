@@ -10,11 +10,11 @@ public class SpawnManager : MonoBehaviour
 
     // Spawning platforms of distance of 6.5 - 14 units
     public float horizontalMin = 12f;
-    public float horizontalMax = 19f;
+    public float horizontalMax = 15f;
 
     // Platforms up/below 6.5 - 14 units
     public float verticalMin = -6f;
-    public float verticalMax = 6f;
+    public float verticalMax = 4f;
 
     private Vector2 originPosition;
 

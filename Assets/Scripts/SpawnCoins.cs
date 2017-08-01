@@ -5,14 +5,18 @@ using UnityEngine;
 public class SpawnCoins : MonoBehaviour {
     public Transform[] coinSpawns;
     public GameObject coin;
+    private int setup ;
 
 	// Use this for initialization
 	void Start () {
+        
         Spawn();
+     
 	}
 	
     void Spawn ()
     {
+        
         for (int i = 0; i < coinSpawns.Length; i++)
         {
             //0 or 1
@@ -20,6 +24,7 @@ public class SpawnCoins : MonoBehaviour {
             if ( coinFlip > 0)
             {
                 Instantiate(coin, coinSpawns[i].position, Quaternion.identity);
+              
             }
         }
 
